@@ -1,7 +1,7 @@
-export type Roles = "ROLE_ADMIN" | "ROLE_USER"
+export type Role = "ROLE_ADMIN" | "ROLE_USER"
 
 export type LoginRequest = {
-    username: string;
+    email: string;
     password: string;
 };
 
@@ -9,5 +9,5 @@ export type TokenResponse = {
     accessToken: string;
     expiresIn: number;
     subject: string;
-    roles: Roles;
+    roles: Role[];
 }
