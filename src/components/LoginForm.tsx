@@ -20,7 +20,6 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
 
   return (
     <>
-      <h1>Log in</h1>
       <form onSubmit={handleLogin} method="POST">
         <label htmlFor="email">Email</label>
         <input
