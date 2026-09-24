@@ -11,3 +11,7 @@ export type TokenResponse = {
     subject: string;
     roles: Role[];
 }
+export type CurrentUser ={
+    email: string;
+    roles: Role[];
+}
