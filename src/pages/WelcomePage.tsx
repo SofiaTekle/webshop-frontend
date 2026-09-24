@@ -24,7 +24,7 @@ const WelcomePage = () => {
   return (
     <main>
       <section>
-        <h1>Välkommen, {user.subject}!</h1>
+        <h1>Välkommen!</h1>
         <p>Användare: {user.subject}</p>
         <p>Roller: {user.roles.join(", ")}</p>
       </section>
