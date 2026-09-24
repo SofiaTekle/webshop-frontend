@@ -7,11 +7,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (credentials: LoginRequest): Promise<void> => {
-    const loginResponse = await login(credentials);
+    await login(credentials);
 
-    navigate("/", {
-      state: { user: loginResponse },
-    });
+    navigate("/");
   };
 
   return (

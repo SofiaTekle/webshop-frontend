@@ -1,14 +1,7 @@
-import { useLocation } from "react-router";
-import type { TokenResponse } from "../types/auth";
-
-type WelcomeLocationState = {
-  user: TokenResponse;
-};
+import { getCurrentUser } from "../service/authService";
 
 const WelcomePage = () => {
-  const location = useLocation();
-  const state = location.state as WelcomeLocationState | null;
-  const user = state?.user;
+  const user = getCurrentUser();
 
   if (!user) {
     return (
@@ -25,7 +18,7 @@ const WelcomePage = () => {
     <main>
       <section>
         <h1>Välkommen!</h1>
-        <p>Användare: {user.subject}</p>
+        <p>Användare: {user.email}</p>
         <p>Roller: {user.roles.join(", ")}</p>
       </section>
     </main>
