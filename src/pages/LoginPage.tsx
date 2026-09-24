@@ -9,7 +9,7 @@ const LoginPage = () => {
   const handleLogin = async (credentials: LoginRequest): Promise<void> => {
     const loginResponse = await login(credentials);
 
-    navigate("/welcome", {
+    navigate("/", {
       state: { user: loginResponse },
     });
   };

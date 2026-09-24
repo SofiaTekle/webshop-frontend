@@ -1,21 +1,34 @@
+import { Link, useLocation } from "react-router-dom";
+import { isAuthenticated } from "../service/authService";
+
 function Header() {
+  useLocation();
+
+  const authenticated = isAuthenticated();
+
   return (
     <header className="site-header">
-      <a className="site-logo" href="/">
+      <Link className="site-logo" to="/">
         Webbshop
-      </a>
+      </Link>
 
       <nav aria-label="Huvudnavigation">
         <ul className="nav-list">
-          <li>
-            <a href="/">Hem</a>
-          </li>
-          <li>
-            <a href="/products">Produkter</a>
-          </li>
-          <li>
-            <a href="/login">Logga in</a>
-          </li>
+          {authenticated ? (
+            <>
+              <li>
+                <Link to="/">Hem</Link>
+              </li>
+
+              <li>
+                <Link to="/products">Produkter</Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login">Logga in</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

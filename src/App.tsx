@@ -4,15 +4,19 @@ import { Route, Routes } from "react-router-dom";
 import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import WelcomePage from "./pages/WelcomePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/products" element={<ProductPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/products" element={<ProductPage />} />
+        </Route>
       </Routes>
 
       <Footer />
