@@ -11,12 +11,10 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/login" element={<LoginPage />} />
 
         <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage />} />
         </Route>
       </Routes>
