@@ -1,4 +1,4 @@
-import type { LoginRequest, TokenResponse,CurrentUser } from "../types/auth";
+import type { LoginRequest, TokenResponse, CurrentUser } from "../types/auth";
 
 const API_URL = import.meta.env.VITE_AUTH_API_URL;
 const TOKEN_KEY = "access_token";
@@ -18,15 +18,14 @@ export async function login(credentials: LoginRequest): Promise<TokenResponse> {
   }
   const data: TokenResponse = await response.json();
 
-  const currentUser: CurrentUser ={
+  const currentUser: CurrentUser = {
     email: data.subject,
     roles: data.roles,
   };
 
-  sessionStorage.setItem(USER_KEY, JSON.stringify(currentUser))
+  sessionStorage.setItem(USER_KEY, JSON.stringify(currentUser));
 
   sessionStorage.setItem(TOKEN_KEY, data.accessToken);
-  
 
   return data;
 }
@@ -38,13 +37,12 @@ export function getToken(): string | null {
 export function isAuthenticated(): boolean {
   return getToken() !== null;
 }
-export function getCurrentUser(): CurrentUser | null{
-    const storedUser = sessionStorage.getItem(USER_KEY)
+export function getCurrentUser(): CurrentUser | null {
+  const storedUser = sessionStorage.getItem(USER_KEY);
 
-    if(storedUser === null){
-        return null;
-    }
+  if (storedUser === null) {
+    return null;
+  }
 
-    return JSON.parse(storedUser) as CurrentUser;
-
+  return JSON.parse(storedUser) as CurrentUser;
 }

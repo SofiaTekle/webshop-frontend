@@ -1,6 +1,5 @@
 import { getCurrentUser } from "../service/authService";
 
-
 const WelcomePage = () => {
   const user = getCurrentUser();
 
