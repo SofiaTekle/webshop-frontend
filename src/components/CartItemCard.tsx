@@ -8,12 +8,14 @@ type CartItemProps = {
 };
 
 function CartItemCard({ item, onIncrease, onDecrease }: CartItemProps) {
+    const lineTotal = item.price * item.quantity;
   return (
     <div>
       <h2>{item.name}</h2>
       <p>{item.description}</p>
       <p>{item.price} kr</p>
       <p>Antal: {item.quantity}</p>
+      <p>Radtotal: {lineTotal} kr</p>
       <button onClick={() => onIncrease(item.id)}>+</button>
       <button onClick={() => onDecrease(item.id)}>-</button>
     </div>
