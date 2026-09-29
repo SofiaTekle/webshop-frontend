@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { isAuthenticated } from "../service/authService";
+import { getCurrentUser, isAuthenticated } from "../service/authService";
 
 function Header() {
   useLocation();
 
   const authenticated = isAuthenticated();
+  const user = getCurrentUser();
+  const isAdmin = user?.roles.includes("ROLE_ADMIN");
 
   return (
     <header className="site-header">
@@ -26,6 +28,12 @@ function Header() {
               <li>
                 <Link to="/cart">Kundvagn</Link>
               </li>
+
+              {isAdmin && (
+                <li>
+                  <Link to="/admin/products">Hantera produkter</Link>
+                </li>
+              )}
             </>
           ) : (
             <li>
