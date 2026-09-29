@@ -58,12 +58,12 @@ export function useCart() {
       alert("Lagersaldot för denna produkt är för lågt");
       return;
     }
-    const updatedItem = [...cartItems];
-    updatedItem[index] = {
+    const updatedItems = [...cartItems];
+    updatedItems[index] = {
       ...currentItem,
       quantity: currentItem.quantity + 1,
     };
-    setCartItems(updatedItem);
+    setCartItems(updatedItems);
   };
 
   function decreaseQuantity(productId: number) {
@@ -73,18 +73,18 @@ export function useCart() {
       return;
     }
     const currentItem = cartItems[index];
-    const updatedItem = [...cartItems];
+    const updatedItems = [...cartItems];
 
     if (currentItem.quantity === 1) {
-      updatedItem.splice(index, 1);
-      setCartItems(updatedItem);
+      updatedItems.splice(index, 1);
+      setCartItems(updatedItems);
       return;
     }
-    updatedItem[index] = {
+    updatedItems[index] = {
       ...currentItem,
       quantity: currentItem.quantity - 1,
     };
-    setCartItems(updatedItem);
+    setCartItems(updatedItems);
   };
 
   useEffect(() => {
