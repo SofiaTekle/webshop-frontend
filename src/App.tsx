@@ -16,12 +16,26 @@ function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function addToCart(product: Product) {
-    const cartItem: CartItem = {
-      ...product,
-      quantity: 1,
-    };
-    setCartItems((currentItem) => [...currentItem, cartItem]);
+    const index = cartItems.findIndex((item) => item.id === product.id);
 
+    if (index === -1) {
+      const newItem = { ...product, quantity: 1 };
+      setCartItems([...cartItems, newItem]);
+      alert(`${product.name} har lagts i kundvagnen`);
+      return;
+    }
+    const currentItem = cartItems[index];
+
+    if (currentItem.quantity >= currentItem.stock) {
+      alert("Lager saldot för denna produkt är för låg");
+      return;
+    }
+    const updatedItems = [...cartItems];
+    updatedItems[index] = {
+      ...currentItem,
+      quantity: currentItem.quantity + 1,
+    };
+    setCartItems(updatedItems);
     alert(`${product.name} har lagts i kundvagnen`);
   }
   return (
