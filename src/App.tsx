@@ -7,6 +7,8 @@ import WelcomePage from "./pages/WelcomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useState } from "react";
 import type { CartItem, Product } from "./types/product";
+import CartPage from "./pages/CartPage";
+
 
 
 
@@ -36,6 +38,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
+          <Route path="/cart" element={<CartPage items={cartItems}/>} />
         </Route>
       </Routes>
 

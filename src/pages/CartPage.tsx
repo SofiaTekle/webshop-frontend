@@ -5,7 +5,7 @@ type CartProps = {
     items: CartItem[];
 }
 
-const Cart = ({items }: CartProps) => {
+const CartPage = ({items }: CartProps) => {
     return (
         <main>
           <h1>Kundvagn</h1>
@@ -16,4 +16,4 @@ const Cart = ({items }: CartProps) => {
         </main>
       );
 };
-export default Cart;
+export default CartPage;
