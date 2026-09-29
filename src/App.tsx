@@ -39,7 +39,6 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProductPage />} />
         </Route>
-
       </Routes>
 
       <Footer />

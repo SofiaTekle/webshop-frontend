@@ -36,7 +36,7 @@ describe("ProductCard", () => {
 
     render(<ProductCard product={product} onAdd={onAdd} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Lägg i kundvagn" }));
+    fireEvent.click(screen.getByRole("button", { name: "Lägg i varukorg" }));
     expect(onAdd).toHaveBeenCalledTimes(1);
     expect(onAdd).toHaveBeenCalledWith(product);
   });
