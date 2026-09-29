@@ -3,7 +3,11 @@ import type { Product } from "../types/product";
 import { getProducts } from "../service/productService";
 import ProductCard from "../components/ProductCard";
 
-export default function ProductPage() {
+type ProductPageProps = {
+  onAdd: (product:Product) => void;
+};
+
+export default function ProductPage({onAdd}: ProductPageProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

@@ -16,13 +16,13 @@ function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function addToCart(product: Product){
-    const cartItems: CartItem = {
+    const cartItem: CartItem = {
       ...product,
       quantity: 1,
     };
     setCartItems(currentItem => [
       ...currentItem,
-      cartItems,
+      cartItem,
     ]);
 
     alert(`${product.name} har lagts i kundvagnen`)
@@ -35,7 +35,7 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/products" element={<ProductPage />} />
+          <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
         </Route>
       </Routes>
 
