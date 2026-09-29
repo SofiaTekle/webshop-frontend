@@ -11,7 +11,7 @@ export function useCart (){
     if (index === -1) {
       const newItem = { ...product, quantity: 1 };
       if (product.stock <= 0) {
-        alert("Lagersaldot för denna produkt är för låg");
+        alert("Lagersaldot för denna produkt är för lågt");
         return;
       }
       setCartItems([...cartItems, newItem]);
@@ -21,7 +21,7 @@ export function useCart (){
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Lagersaldot för denna produkt är för låg");
+      alert("Lagersaldot för denna produkt är för lågt");
       return;
     }
     const updatedItems = [...cartItems];
@@ -31,7 +31,52 @@ export function useCart (){
     };
     setCartItems(updatedItems);
     alert(`${product.name} har lagts i kundvagnen`);
-  }
+  };
 
-  return {cartItems,addToCart,};
+
+  function increaseQuantity(productId: number){
+    const index = cartItems.findIndex((item) => item.id === productId);
+
+    const currentItem = cartItems[index];
+
+    if(index === -1){
+        return;
+    }
+
+    if(currentItem.quantity >= currentItem.stock){
+        alert("Lagersaldot för denna produkt är för lågt");
+        return;
+    }
+    const updatedItem = [...cartItems]
+    updatedItem[index] = {
+        ...currentItem,
+        quantity: currentItem.quantity + 1,
+    };
+    setCartItems(updatedItem);
+  };
+
+  function decreaseQuantity(productId: number){
+    const index = cartItems.findIndex((item) => item.id === productId);
+
+    if(index === -1){
+        return;
+    }
+    const currentItem = cartItems[index];
+    const updatedItem = [...cartItems]
+
+    if(currentItem.quantity === 1){
+        updatedItem.splice(index, 1);
+        setCartItems(updatedItem)
+        return;
+    }
+    updatedItem[index] = {
+        ...currentItem,
+        quantity: currentItem.quantity - 1,
+    };
+    setCartItems(updatedItem);
+  };
+
+
+
+  return {cartItems,addToCart,increaseQuantity, decreaseQuantity};
 }
