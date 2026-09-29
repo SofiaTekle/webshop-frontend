@@ -8,6 +8,10 @@ type CartProps = {
 };
 
 const CartPage = ({ items, onDecrease, onIncrease }: CartProps) => {
+    const cartTotal = items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+    );
   if (items.length === 0) {
     return (
       <main>
@@ -24,6 +28,7 @@ const CartPage = ({ items, onDecrease, onIncrease }: CartProps) => {
       {items.map((item) => (
         <CartItemCard onIncrease={onIncrease} onDecrease={onDecrease} key={item.id} item={item} />
       ))}
+      <p><strong>Total: {cartTotal} kr</strong></p>
     </main>
   );
 };
