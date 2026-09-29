@@ -25,6 +25,9 @@ function Header() {
               <li>
                 <Link to="/products">Produkter</Link>
               </li>
+              <li>
+                <Link to="/cart">Kundvagn</Link>
+              </li>
 
               {isAdmin && (
                 <li>
