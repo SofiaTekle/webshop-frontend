@@ -1,5 +1,4 @@
 import type { CartItem } from "../types/product"
-import { useCart } from "../hooks/useCart";
 
 
 type CartItemProps = {
