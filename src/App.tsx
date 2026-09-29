@@ -21,7 +21,7 @@ function App() {
     if (index === -1) {
       const newItem = { ...product, quantity: 1 };
       if (product.stock <= 0) {
-        alert("Lager saldot för denna produkt är för låg");
+        alert("Lagersaldot för denna produkt är för låg");
         return;
       }
       setCartItems([...cartItems, newItem]);
@@ -31,7 +31,7 @@ function App() {
     const currentItem = cartItems[index];
 
     if (currentItem.quantity >= currentItem.stock) {
-      alert("Lager saldot för denna produkt är för låg");
+      alert("Lagersaldot för denna produkt är för låg");
       return;
     }
     const updatedItems = [...cartItems];
