@@ -5,8 +5,28 @@ import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import WelcomePage from "./pages/WelcomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useState } from "react";
+import type { CartItem, Product } from "./types/product";
+
+
+
 
 function App() {
+
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  function addToCart(product: Product){
+    const cartItems: CartItem = {
+      ...product,
+      quantity: 1,
+    };
+    setCartItems(currentItem => [
+      ...currentItem,
+      cartItems,
+    ]);
+
+    alert(`${product.name} har lagts i kundvagnen`)
+  }
   return (
     <>
       <Header />
