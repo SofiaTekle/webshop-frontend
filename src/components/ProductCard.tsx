@@ -1,23 +1,19 @@
 import type { Product } from "../types/product";
 
-
 type ProductCardProps = {
-    product: Product;
-}
+  product: Product;
+  onAdd: (product: Product) => void;
+};
 
-export default function ProductCard({ product }: ProductCardProps){
-
-return(
+export default function ProductCard({ product, onAdd }: ProductCardProps) {
+  return (
     <div>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>{product.price} kr</p>
-        <p>Lager: {product.stock}</p>
+      <h2>{product.name}</h2>
+      <p>{product.description}</p>
+      <p>{product.price} kr</p>
+      <p>Lager: {product.stock}</p>
+
+      <button onClick={() => onAdd(product)}>Lägg i kundvagn</button>
     </div>
-)
-
-
-
-
-
+  );
 }

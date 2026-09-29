@@ -5,8 +5,30 @@ import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import WelcomePage from "./pages/WelcomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useState } from "react";
+import type { CartItem, Product } from "./types/product";
+import CartPage from "./pages/CartPage";
+
+
+
+
 
 function App() {
+
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  function addToCart(product: Product){
+    const cartItem: CartItem = {
+      ...product,
+      quantity: 1,
+    };
+    setCartItems(currentItem => [
+      ...currentItem,
+      cartItem,
+    ]);
+
+    alert(`${product.name} har lagts i kundvagnen`)
+  }
   return (
     <>
       <Header />
@@ -15,7 +37,8 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/products" element={<ProductPage />} />
+          <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
+          <Route path="/cart" element={<CartPage items={cartItems}/>} />
         </Route>
       </Routes>
 
