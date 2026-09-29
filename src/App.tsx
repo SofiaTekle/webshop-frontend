@@ -20,6 +20,10 @@ function App() {
 
     if (index === -1) {
       const newItem = { ...product, quantity: 1 };
+      if (product.stock <= 0) {
+        alert("Lager saldot för denna produkt är för låg");
+        return;
+      }
       setCartItems([...cartItems, newItem]);
       alert(`${product.name} har lagts i kundvagnen`);
       return;
