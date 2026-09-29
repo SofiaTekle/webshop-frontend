@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { CartItem, Product } from "../types/product";
 
-export function useCart (){
-     
- const [cartItems, setCartItems] = useState<CartItem[]>([]);
+const CART_STORAGE_KEY = "cartItems";
+
+export function useCart() {
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const savedCart = sessionStorage.getItem(CART_STORAGE_KEY);
+
+    if (!savedCart) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(savedCart) as CartItem[];
+    } catch {
+      return [];
+    }
+  });
 
   function addToCart(product: Product) {
     const index = cartItems.findIndex((item) => item.id === product.id);
@@ -28,55 +41,56 @@ export function useCart (){
     updatedItems[index] = {
       ...currentItem,
       quantity: currentItem.quantity + 1,
-    };
+    }
     setCartItems(updatedItems);
     alert(`${product.name} har lagts i kundvagnen`);
   };
 
-
-  function increaseQuantity(productId: number){
+  function increaseQuantity(productId: number) {
     const index = cartItems.findIndex((item) => item.id === productId);
 
+    if (index === -1) {
+      return;
+    }
     const currentItem = cartItems[index];
 
-    if(index === -1){
-        return;
+    if (currentItem.quantity >= currentItem.stock) {
+      alert("Lagersaldot för denna produkt är för lågt");
+      return;
     }
-
-    if(currentItem.quantity >= currentItem.stock){
-        alert("Lagersaldot för denna produkt är för lågt");
-        return;
-    }
-    const updatedItem = [...cartItems]
+    const updatedItem = [...cartItems];
     updatedItem[index] = {
-        ...currentItem,
-        quantity: currentItem.quantity + 1,
+      ...currentItem,
+      quantity: currentItem.quantity + 1,
     };
     setCartItems(updatedItem);
   };
 
-  function decreaseQuantity(productId: number){
+  function decreaseQuantity(productId: number) {
     const index = cartItems.findIndex((item) => item.id === productId);
 
-    if(index === -1){
-        return;
+    if (index === -1) {
+      return;
     }
     const currentItem = cartItems[index];
-    const updatedItem = [...cartItems]
+    const updatedItem = [...cartItems];
 
-    if(currentItem.quantity === 1){
-        updatedItem.splice(index, 1);
-        setCartItems(updatedItem)
-        return;
+    if (currentItem.quantity === 1) {
+      updatedItem.splice(index, 1);
+      setCartItems(updatedItem);
+      return;
     }
     updatedItem[index] = {
-        ...currentItem,
-        quantity: currentItem.quantity - 1,
+      ...currentItem,
+      quantity: currentItem.quantity - 1,
     };
     setCartItems(updatedItem);
   };
 
+  useEffect(() => {
+    sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems]);
+  
 
-
-  return {cartItems,addToCart,increaseQuantity, decreaseQuantity};
+  return { cartItems, addToCart, increaseQuantity, decreaseQuantity };
 }
