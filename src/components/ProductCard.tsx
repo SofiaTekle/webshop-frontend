@@ -2,7 +2,7 @@ import type { Product } from "../types/product";
 
 type ProductCardProps = {
   product: Product;
-  onAdd: (product: Product) => void;
+  onAdd?: (product: Product) => void;
 };
 
 export default function ProductCard({ product, onAdd }: ProductCardProps) {
@@ -13,7 +13,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
       <p>{product.price} kr</p>
       <p>Lager: {product.stock}</p>
 
-      <button onClick={() => onAdd(product)}>Lägg i kundvagn</button>
+      {onAdd && <button onClick={() => onAdd(product)}>Lägg i varukorg</button>}
     </div>
   );
 }
