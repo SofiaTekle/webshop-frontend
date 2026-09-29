@@ -47,7 +47,7 @@ export default function ProductPage({onAdd}: ProductPageProps) {
       <h1>Produkter</h1>
 
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} onAdd={onAdd} />
       ))}
     </main>
   );
