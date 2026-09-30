@@ -9,9 +9,11 @@ import CartPage from "./pages/CartPage";
 import { useCart } from "./hooks/useCart";
 import AdminRoute from "./components/AdminRoute";
 import AdminProductPage from "./pages/AdminProductPage";
+import ProductFormPage from "./pages/ProductFormPage";
 
 function App() {
-  const {cartItems, addToCart,increaseQuantity, decreaseQuantity} = useCart();
+  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
+    useCart();
 
   return (
     <>
@@ -22,11 +24,21 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
-          <Route path="/cart" element={<CartPage onIncrease={increaseQuantity} onDecrease={decreaseQuantity} items={cartItems} />} />
+          <Route
+            path="/cart"
+            element={
+              <CartPage
+                onIncrease={increaseQuantity}
+                onDecrease={decreaseQuantity}
+                items={cartItems}
+              />
+            }
+          />
         </Route>
 
         <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProductPage />} />
+          <Route path="/admin/products/new" element={<ProductFormPage />} />
         </Route>
       </Routes>
 
