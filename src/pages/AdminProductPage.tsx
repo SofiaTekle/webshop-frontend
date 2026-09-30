@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
 import { getProducts } from "../service/productService";
 import ProductCard from "../components/ProductCard";
@@ -41,7 +42,7 @@ export default function AdminProductPage() {
   return (
     <main>
       <h1>Hantera produkter</h1>
-
+      <Link to="/admin/products/new">Lägg till produkt</Link>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
