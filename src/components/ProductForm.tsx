@@ -41,7 +41,7 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="product-form" onSubmit={handleSubmit}>
       <label htmlFor="name">Namn</label>
       <input
         id="name"

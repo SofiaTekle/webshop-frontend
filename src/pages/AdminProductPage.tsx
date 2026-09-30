@@ -41,11 +41,15 @@ export default function AdminProductPage() {
 
   return (
     <main>
-      <h1>Hantera produkter</h1>
-      <Link to="/admin/products/new">Lägg till produkt</Link>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <div className="center-text">
+        <h1>Hantera produkter</h1>
+        <Link to="/admin/products/new">Lägg till produkt</Link>
+      </div>
+      <div className="product-container">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </main>
   );
 }

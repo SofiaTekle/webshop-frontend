@@ -10,7 +10,7 @@ type CartItemProps = {
 function CartItemCard({ item, onIncrease, onDecrease }: CartItemProps) {
     const lineTotal = item.price * item.quantity;
   return (
-    <div>
+    <div className="cartitem-card">
       <h2>{item.name}</h2>
       <p>{item.description}</p>
       <p>{item.price} kr</p>
