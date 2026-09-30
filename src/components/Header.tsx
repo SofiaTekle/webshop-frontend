@@ -14,7 +14,7 @@ function Header() {
         Webbshop
       </Link>
 
-      <nav aria-label="Huvudnavigation">
+      <nav className="nav-list" aria-label="Huvudnavigation">
         <ul className="nav-list">
           {authenticated ? (
             <>

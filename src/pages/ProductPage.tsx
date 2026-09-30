@@ -44,11 +44,15 @@ export default function ProductPage({onAdd}: ProductPageProps) {
 
   return (
     <main>
-      <h1>Produkter</h1>
+      <h1 className="center-text">Produkter</h1>
 
-      {products.map((product) => (
+      <div className="product-container">
+        {products.map((product) => (
         <ProductCard key={product.id} product={product} onAdd={onAdd} />
       ))}
+      </div>
+
+      
     </main>
   );
 }

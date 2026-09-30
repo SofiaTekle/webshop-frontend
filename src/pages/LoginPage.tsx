@@ -14,8 +14,8 @@ const LoginPage = () => {
 
   return (
     <main>
-      <section>
-        <h1>Sign in</h1>
+      <section className="login-box">
+        <h1 className="center-text">Sign in</h1>
         <LoginForm onLogin={handleLogin}></LoginForm>
       </section>
     </main>

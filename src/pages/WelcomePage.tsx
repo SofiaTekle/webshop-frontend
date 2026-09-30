@@ -5,8 +5,8 @@ const WelcomePage = () => {
 
   if (!user) {
     return (
-      <main>
-        <section>
+      <main className="welcome-page">
+        <section className="welcome-box">
           <h1>Ingen inloggningsinformation</h1>
           <p>Logga in för att se välkomstsidan.</p>
         </section>
@@ -15,11 +15,13 @@ const WelcomePage = () => {
   }
 
   return (
-    <main>
+    <main className="welcome-page">
       <section>
-        <h1>Välkommen!</h1>
-        <p>Användare: {user.email}</p>
-        <p>Roller: {user.roles.join(", ")}</p>
+        <h1 className="center-text">Välkommen!</h1>
+        <div className="welcome-box">
+          <p>Användare: {user.email}</p>
+          <p>Roller: {user.roles.join(", ")}</p>
+        </div>
       </section>
     </main>
   );
