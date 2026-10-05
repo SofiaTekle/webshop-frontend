@@ -10,6 +10,7 @@ import { useCart } from "./hooks/useCart";
 import AdminRoute from "./components/AdminRoute";
 import AdminProductPage from "./pages/AdminProductPage";
 import ProductFormPage from "./pages/ProductFormPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
@@ -39,6 +40,8 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProductPage />} />
           <Route path="/admin/products/new" element={<ProductFormPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+
         </Route>
       </Routes>
 
