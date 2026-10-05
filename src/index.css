@@ -71,6 +71,16 @@ a:hover {
   margin-top: auto;
   align-self: center;
 }
+
+.product-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
 .product-container {
   display: flex;
   justify-content: center;
@@ -107,9 +117,11 @@ a:hover {
 .product-form > button {
   grid-column: 1 / -1;
 }
-.product-form input {
+.product-form input ,
+.product-form select {
   width: 100%;
   padding: 0.5rem;
+  font: inherit;
 }
 .cart-container {
   display: flex;
