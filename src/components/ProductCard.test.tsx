@@ -11,6 +11,8 @@ describe("ProductCard", () => {
       description: "Beskrivning av testprodukten",
       price: 199,
       stock: 5,
+      category: "SHOES",
+      imageUrl: "https://example.com/shoes.jpg",
     };
     render(<ProductCard product={product} onAdd={vi.fn()} />);
 
@@ -31,6 +33,8 @@ describe("ProductCard", () => {
       description: "Beskrivning av testprodukten",
       price: 199,
       stock: 5,
+      category: "SHOES",
+      imageUrl: "https://example.com/shoes.jpg",
     };
     const onAdd = vi.fn();
 

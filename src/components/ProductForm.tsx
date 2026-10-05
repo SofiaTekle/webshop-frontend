@@ -1,5 +1,6 @@
-import type { NewProduct } from "../types/product";
+import type { Category, NewProduct } from "../types/product";
 import { useState } from "react";
+
 
 type ProductFormProps = {
   onSubmit: (product: NewProduct) => Promise<void>;
@@ -10,6 +11,8 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [category, setCategory] = useState<Category | "">("");
+  const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -17,7 +20,7 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
     e.preventDefault();
     setError("");
 
-    if (!name || !description || !price || !stock) {
+    if (!name || !description || !price || !stock || !category || !imageUrl) {
       setError("Alla fält måste fyllas i.");
       return;
     }
@@ -29,6 +32,8 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
         description,
         price: Number(price),
         stock: Number(stock),
+        category,
+        imageUrl,
       });
     } catch (err) {
       if (err instanceof Error) {
@@ -72,6 +77,27 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
         type="number"
         value={stock}
         onChange={(e) => setStock(e.target.value)}
+      />
+
+      <label htmlFor="category">Kategori</label>
+      <select
+        id="category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value as Category)}
+      >
+        <option value="">Välj kategori</option>
+        <option value="SHOES">Skor</option>
+        <option value="SWEATERS">Tröjor</option>
+        <option value="PANTS">Byxor</option>
+        <option value="TOPS">Toppar</option>
+      </select>
+
+      <label htmlFor="imageUrl">Bild-URL</label>
+      <input
+        id="imageUrl"
+        type="url"
+        value={imageUrl}
+        onChange={(e) => setImageUrl(e.target.value)}
       />
 
       {error && <p style={{ color: "red" }}>{error}</p>}
