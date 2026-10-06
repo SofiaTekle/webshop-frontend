@@ -5,7 +5,7 @@ export type Product = {
   price: number;
   stock: number;
   category: Category;
-  imageUrl: string;
+  imageUrl: string | null;
 };
 
 export type Category = "SHOES" | "SWEATERS" | "PANTS" | "TOPS";
@@ -20,5 +20,5 @@ export type NewProduct = {
   price: number;
   stock: number;
   category: Category;
-  imageUrl: string;
+  imageUrl: string | null;
 };
