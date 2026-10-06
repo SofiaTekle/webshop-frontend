@@ -10,6 +10,7 @@ import { useCart } from "./hooks/useCart";
 import AdminRoute from "./components/AdminRoute";
 import AdminProductPage from "./pages/AdminProductPage";
 import ProductFormPage from "./pages/ProductFormPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route
             path="/cart"
             element={
