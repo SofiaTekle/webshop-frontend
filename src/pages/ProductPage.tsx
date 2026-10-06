@@ -76,7 +76,7 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
           ))}
         </select>
          <label htmlFor="product-search">
-          Sök produkt
+         <strong>Sök produkt: </strong>
         </label>
 
         <input
@@ -90,6 +90,9 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
       </div>
 
       <div className="product-container">
+        {filteredProducts.length === 0 && (
+          <p>Inga produkter matchar din sökning.</p>
+        )}
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} onAdd={onAdd} />
         ))}
