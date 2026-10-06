@@ -1,4 +1,5 @@
 import type { Product } from "../types/product";
+import placeholderImage from "../assets/placeholder.png";
 
 type ProductCardProps = {
   product: Product;
@@ -8,9 +9,9 @@ type ProductCardProps = {
 export default function ProductCard({ product, onAdd }: ProductCardProps) {
   return (
     <div className="product-card">
-      <img 
-        src={product.imageUrl} 
-        alt={product.name} 
+      <img
+        src={product.imageUrl || placeholderImage}
+        alt={product.name}
       />
       <h2>{product.name}</h2>
       <p>{product.description}</p>

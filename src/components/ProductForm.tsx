@@ -20,7 +20,7 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
     e.preventDefault();
     setError("");
 
-    if (!name || !description || !price || !stock || !category || !imageUrl) {
+    if (!name || !description || !price || !stock || !category) {
       setError("Alla fält måste fyllas i.");
       return;
     }
