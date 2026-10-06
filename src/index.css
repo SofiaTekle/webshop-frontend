@@ -44,7 +44,7 @@ a:hover {
   justify-content: space-between;
 }
 .product-card {
-  width: 225px;
+  width: 280px;
   text-align: center;
   border: 2px solid lightgray;
   padding: 15px;
@@ -55,10 +55,10 @@ a:hover {
   max-width: 100%;
   position: relative;
   align-items: stretch;
-  width: 225px;
   min-height: 280px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 .product-card h2 {
   min-height: 2.4em;
@@ -74,7 +74,7 @@ a:hover {
 
 .product-card img {
   width: 100%;
-  height: 130px;
+  height: 170px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -183,5 +183,38 @@ a:hover {
 .login-form input,
 .login-form button {
   padding: 0.5rem;
+}
+
+.product-detail-page {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.product-detail {
+  width: 500px;
+  max-width: 100%;
+  text-align: center;
+  background-color: #dbf8dc;
+  border: 2px solid lightgray;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-detail h1 {
+  margin-top: 0;
+}
+
+.product-detail-image {
+ width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.product-detail-info {
+  font-size: 1.1rem;
 }
 

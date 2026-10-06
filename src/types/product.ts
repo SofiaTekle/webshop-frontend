@@ -1,3 +1,5 @@
+import type { Category } from "./category";
+
 export type Product = {
   id: number;
   name: string;
@@ -5,10 +7,8 @@ export type Product = {
   price: number;
   stock: number;
   category: Category;
-  imageUrl: string;
+  imageUrl: string | null;
 };
-
-export type Category = "SHOES" | "SWEATERS" | "PANTS" | "TOPS";
 
 export type CartItem = Product & {
   quantity: number;
@@ -20,5 +20,5 @@ export type NewProduct = {
   price: number;
   stock: number;
   category: Category;
-  imageUrl: string;
+  imageUrl: string | null;
 };

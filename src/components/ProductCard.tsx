@@ -1,4 +1,6 @@
 import type { Product } from "../types/product";
+import placeholderImage from "../assets/placeholder.png";
+import { useNavigate } from "react-router-dom";
 
 type ProductCardProps = {
   product: Product;
@@ -6,18 +8,29 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product, onAdd }: ProductCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <div className="product-card">
-      <img 
-        src={product.imageUrl} 
-        alt={product.name} 
-      />
+    <div
+      className="product-card"
+      onClick={() => navigate(`/products/${product.id}`)}
+    >
+      <img src={product.imageUrl || placeholderImage} alt={product.name} />
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <p>{product.price} kr</p>
       <p>Lager: {product.stock}</p>
 
-      {onAdd && <button onClick={() => onAdd(product)}>Lägg i varukorg</button>}
+      {onAdd && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onAdd(product);
+          }}
+        >
+          Lägg i varukorg
+        </button>
+      )}
     </div>
   );
 }
