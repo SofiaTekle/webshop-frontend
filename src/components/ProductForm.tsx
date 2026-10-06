@@ -1,5 +1,6 @@
-import type { Category, NewProduct } from "../types/product";
+import type { NewProduct } from "../types/product";
 import { useState } from "react";
+import type { Category } from "../types/category";
 
 
 type ProductFormProps = {
