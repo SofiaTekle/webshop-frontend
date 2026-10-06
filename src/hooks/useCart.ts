@@ -41,10 +41,10 @@ export function useCart() {
     updatedItems[index] = {
       ...currentItem,
       quantity: currentItem.quantity + 1,
-    }
+    };
     setCartItems(updatedItems);
     alert(`${product.name} har lagts i kundvagnen`);
-  };
+  }
 
   function increaseQuantity(productId: number) {
     const index = cartItems.findIndex((item) => item.id === productId);
@@ -64,7 +64,7 @@ export function useCart() {
       quantity: currentItem.quantity + 1,
     };
     setCartItems(updatedItems);
-  };
+  }
 
   function decreaseQuantity(productId: number) {
     const index = cartItems.findIndex((item) => item.id === productId);
@@ -85,12 +85,21 @@ export function useCart() {
       quantity: currentItem.quantity - 1,
     };
     setCartItems(updatedItems);
-  };
+  }
 
   useEffect(() => {
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
-  
 
-  return { cartItems, addToCart, increaseQuantity, decreaseQuantity };
+  function clearCart() {
+    setCartItems([]);
+  }
+
+  return {
+    cartItems,
+    addToCart,
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart,
+  };
 }

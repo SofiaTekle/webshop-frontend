@@ -13,8 +13,13 @@ import ProductFormPage from "./pages/ProductFormPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const { cartItems, addToCart, increaseQuantity, decreaseQuantity } =
-    useCart();
+  const {
+    cartItems,
+    addToCart,
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart,
+  } = useCart();
 
   return (
     <>
@@ -32,6 +37,7 @@ function App() {
                 onIncrease={increaseQuantity}
                 onDecrease={decreaseQuantity}
                 items={cartItems}
+                onOrderSuccess={clearCart}
               />
             }
           />
@@ -41,7 +47,6 @@ function App() {
           <Route path="/admin/products" element={<AdminProductPage />} />
           <Route path="/admin/products/new" element={<ProductFormPage />} />
           <Route path="*" element={<NotFoundPage />} />
-
         </Route>
       </Routes>
 
