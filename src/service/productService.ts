@@ -19,6 +19,22 @@ export async function getProducts(): Promise<Product[]> {
   return response.json();
 }
 
+export async function getProductById(id: number): Promise<Product> {
+  const token = getToken();
+
+  const response = await fetch(`${API_BASE}/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Could not fetch product, ${response.status}`);
+  }
+
+  return response.json();
+}
+
 export async function createProduct(product: NewProduct): Promise<Product> {
   const token = getToken();
 
