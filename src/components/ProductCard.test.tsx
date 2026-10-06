@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import ProductCard from "./ProductCard";
 import type { Product } from "../types/product";
@@ -14,7 +15,11 @@ describe("ProductCard", () => {
       category: "SHOES",
       imageUrl: "https://example.com/shoes.jpg",
     };
-    render(<ProductCard product={product} onAdd={vi.fn()} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={vi.fn()} />
+      </MemoryRouter>,
+    );
 
     expect(
       screen.getByRole("heading", { name: "Testprodukt" }),
@@ -38,7 +43,11 @@ describe("ProductCard", () => {
     };
     const onAdd = vi.fn();
 
-    render(<ProductCard product={product} onAdd={onAdd} />);
+    render(
+      <MemoryRouter>
+        <ProductCard product={product} onAdd={onAdd} />
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "Lägg i varukorg" }));
     expect(onAdd).toHaveBeenCalledTimes(1);
