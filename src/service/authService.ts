@@ -46,3 +46,8 @@ export function getCurrentUser(): CurrentUser | null {
 
   return JSON.parse(storedUser) as CurrentUser;
 }
+
+export function logout(): void {
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(USER_KEY);
+}

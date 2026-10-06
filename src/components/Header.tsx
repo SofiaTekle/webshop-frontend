@@ -1,8 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
-import { getCurrentUser, isAuthenticated } from "../service/authService";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  getCurrentUser,
+  isAuthenticated,
+  logout,
+} from "../service/authService";
 
 function Header() {
   useLocation();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
 
   const authenticated = isAuthenticated();
   const user = getCurrentUser();
@@ -27,6 +37,11 @@ function Header() {
               </li>
               <li>
                 <Link to="/cart">Kundvagn</Link>
+              </li>
+              <li>
+                <button type="button" onClick={handleLogout}>
+                  Logga ut
+                </button>
               </li>
 
               {isAdmin && (
