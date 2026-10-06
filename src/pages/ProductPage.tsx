@@ -14,11 +14,19 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const categoryOptions = ["Alla", ...categories];
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const searchedProducts = products.filter((product) =>
+    [product.description, product.name].some((value) =>
+      value.toLowerCase().includes(normalizedSearch),
+    ),
+  );
 
   const filteredProducts =
     selectedCategory === "Alla"
-      ? products
-      : products.filter((product) => product.category === selectedCategory);
+      ? searchedProducts
+      : searchedProducts.filter((product) => product.category === selectedCategory);
 
   useEffect(() => {
     async function loadProducts() {
@@ -53,19 +61,38 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
   return (
     <main>
       <h1 className="center-text">Produkter</h1>
-      <span><strong>Kategori: </strong></span>
-      <select
-        value={selectedCategory}
-        onChange={(event) => setSelectedCategory(event.target.value)}
-      >
-        {categoryOptions.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
+      <div>
+        <span>
+          <strong>Kategori: </strong>
+        </span>
+        <select
+          value={selectedCategory}
+          onChange={(event) => setSelectedCategory(event.target.value)}
+        >
+          {categoryOptions.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+         <label htmlFor="product-search">
+         <strong>Sök produkt: </strong>
+        </label>
+
+        <input
+          id="product-search"
+          type="search"
+          value={searchTerm}
+          placeholder="Sök bland produkter..."
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+
+      </div>
 
       <div className="product-container">
+        {filteredProducts.length === 0 && (
+          <p>Inga produkter matchar din sökning.</p>
+        )}
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} onAdd={onAdd} />
         ))}
