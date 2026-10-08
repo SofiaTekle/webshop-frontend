@@ -31,7 +31,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
-          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage onAdd={addToCart} />}  />
           <Route
             path="/cart"
             element={
