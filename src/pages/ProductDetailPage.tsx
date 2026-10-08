@@ -4,7 +4,11 @@ import type { Product } from "../types/product";
 import { getProductById } from "../service/productService";
 import placeholderImage from "../assets/placeholder.png";
 
-export default function ProductDetailPage() {
+type ProductDetailProps ={
+  onAdd: (product: Product) => void;
+}
+
+export default function ProductDetailPage({onAdd}: ProductDetailProps) {
   const { id } = useParams<{ id: string }>();
 
   const [product, setProduct] = useState<Product | null>(null);
@@ -68,6 +72,7 @@ export default function ProductDetailPage() {
           <p>{product.price} kr</p>
           <p>Lager: {product.stock}</p>
           <p>Kategori: {product.category}</p>
+          <button onClick={() => onAdd(product)}>Lägg i varukorg</button>
         </div>
       </div>
     </main>
