@@ -20,6 +20,7 @@ function App() {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart
   } = useCart();
 
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
           <Route path="/products/:id" element={<ProductDetailPage onAdd={addToCart} />}  />
-          <Route path="/payment/success" element={<PaymentSuccessPage/>}></Route>
+          <Route path="/payment/success" element={<PaymentSuccessPage clearCart={clearCart}/>}></Route>
           <Route
             path="/cart"
             element={

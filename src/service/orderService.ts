@@ -1,6 +1,7 @@
 import type { CartItem } from "../types/product";
 import { getToken } from "./authService";
 import type { CheckoutResponse } from "../types/checkout";
+import type { OrderResponse } from "../types/order";
 
 const API_BASE = import.meta.env.VITE_ORDER_API_URL;
 
@@ -58,5 +59,29 @@ export async function createCheckout(items: CartItem[]): Promise<CheckoutRespons
 
   return response.json();
 }
+
+export async function getOrderById(orderId: number): Promise<OrderResponse>{
+
+  const token = getToken();
+
+  if (!token) {
+    throw new Error("Du måste logga in för att hämta ordern.");
+  }
+
+
+  const response = await fetch(`${API_BASE}/orders/${orderId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Kunde inte hämta ordern (${response.status}).`);
+  }
+
+  return response.json();
+}
+  
 
 
