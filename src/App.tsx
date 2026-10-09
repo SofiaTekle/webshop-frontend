@@ -12,6 +12,8 @@ import AdminProductPage from "./pages/AdminProductPage";
 import ProductFormPage from "./pages/ProductFormPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { PaymentSuccessPage } from "./pages/PaymentSuccessPage";
+import { PaymentCancelPage } from "./pages/PaymentCancelPage";
 
 function App() {
   const {
@@ -19,7 +21,7 @@ function App() {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCart,
+    clearCart
   } = useCart();
 
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
           <Route path="/products/:id" element={<ProductDetailPage onAdd={addToCart} />}  />
+          <Route path="/payment/success" element={<PaymentSuccessPage clearCart={clearCart}/>}></Route>
+          <Route path="/payment/cancel" element={<PaymentCancelPage/>}></Route>
           <Route
             path="/cart"
             element={
@@ -39,7 +43,6 @@ function App() {
                 onIncrease={increaseQuantity}
                 onDecrease={decreaseQuantity}
                 items={cartItems}
-                onOrderSuccess={clearCart}
               />
             }
           />
