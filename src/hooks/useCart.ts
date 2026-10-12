@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import type { CartItem, Product } from "../types/product";
 
 const CART_STORAGE_KEY = "cartItems";
@@ -91,9 +91,9 @@ export function useCart() {
     sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
 
-  function clearCart() {
-    setCartItems([]);
-  }
+ const clearCart = useCallback(() => {
+  setCartItems([]);
+}, []);
 
   return {
     cartItems,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createOrder } from "../service/orderService";
+import { createCheckout } from "../service/orderService";
 import CartItemCard from "../components/CartItemCard";
 import type { CartItem } from "../types/product";
 
@@ -7,18 +7,15 @@ type CartProps = {
   items: CartItem[];
   onIncrease: (productId: number) => void;
   onDecrease: (productId: number) => void;
-  onOrderSuccess: () => void;
 };
 
 const CartPage = ({
   items,
   onDecrease,
   onIncrease,
-  onOrderSuccess,
 }: CartProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   async function handleCheckout() {
     if (isSubmitting || items.length === 0) return;
@@ -27,9 +24,8 @@ const CartPage = ({
     setError("");
 
     try {
-      await createOrder(items);
-      onOrderSuccess();
-      setSuccess("Beställningen har skapats!");
+      const checkout = await createCheckout(items);
+      window.location.assign(checkout.checkoutUrl)
     } catch (err) {
       setError(
         err instanceof Error
@@ -49,7 +45,6 @@ const CartPage = ({
       <main className="center-text">
         <h1>Kundvagn</h1>
         <p>Kundvagnen är tom.</p>
-        {success && <p role="status">{success}</p>}
       </main>
     );
   }
