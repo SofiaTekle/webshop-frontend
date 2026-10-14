@@ -3,7 +3,7 @@ import { getToken } from "./authService";
 import type { CheckoutResponse } from "../types/checkout";
 import type { OrderResponse } from "../types/order";
 
-const API_BASE = import.meta.env.VITE_ORDER_API_URL;
+const API_BASE = import.meta.env.VITE_GATEWAY_API_URL;
 
 
 export async function createOrder(items: CartItem[]): Promise<void> {

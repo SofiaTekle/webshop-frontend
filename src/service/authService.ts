@@ -1,6 +1,6 @@
 import type { LoginRequest, TokenResponse, CurrentUser } from "../types/auth";
 
-const API_URL = import.meta.env.VITE_AUTH_API_URL;
+const API_URL = import.meta.env.VITE_GATEWAY_API_URL;
 const TOKEN_KEY = "access_token";
 const USER_KEY = "current_user";
 
