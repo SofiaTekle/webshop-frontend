@@ -1,7 +1,7 @@
 import type { Product, NewProduct } from "../types/product";
 import { getToken } from "./authService";
 
-const API_BASE = import.meta.env.VITE_PRODUCT_API_URL;
+const API_BASE = import.meta.env.VITE_GATEWAY_API_URL;
 
 export async function getProducts(): Promise<Product[]> {
   const token = getToken();
