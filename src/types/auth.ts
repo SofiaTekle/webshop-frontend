@@ -12,6 +12,7 @@ export type TokenResponse = {
   roles: Role[];
 };
 export type CurrentUser = {
-  email: string;
+  expiresIn: number;
+  subject: string;
   roles: Role[];
 };
