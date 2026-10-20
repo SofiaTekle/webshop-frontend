@@ -1,17 +1,17 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../service/authService";
+import { Link, useNavigate } from "react-router-dom";
 import type { CurrentUser } from "../types/auth";
 
 type HeaderProps = {
   currentUser: CurrentUser | null;
+  onLogout: () => Promise<void>;
 }
 
-function Header({currentUser}: HeaderProps) {
-  useLocation();
+function Header({currentUser, onLogout}: HeaderProps) {
+
   const navigate = useNavigate();
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await onLogout();
     navigate("/login", { replace: true });
   }
 

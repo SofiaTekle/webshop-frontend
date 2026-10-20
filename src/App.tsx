@@ -15,8 +15,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { PaymentSuccessPage } from "./pages/PaymentSuccessPage";
 import { PaymentCancelPage } from "./pages/PaymentCancelPage";
 import { useEffect, useState } from "react";
-import { getSession } from "./service/authService";
-import type { CurrentUser } from "./types/auth.ts";
+import { getSession, login, logout } from "./service/authService";
+import type { CurrentUser, LoginRequest } from "./types/auth.ts";
 
 function App() {
   const {
@@ -44,15 +44,31 @@ function App() {
     restoreSession();
   }, []);
 
+async function handleLogin(credentials: LoginRequest): Promise<void> {
+    const loggedInUser = await login(credentials);
+    setCurrentUser(loggedInUser);
+  }
+
+  async function handleLogout(): Promise<void> {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Utloggningen misslyckades:", error);
+    } finally {
+      setCurrentUser(null);
+    }
+  }
+
   if (checkingSession) {
     return <p>Kontrollerar inloggning...</p>;
   }
 
+
   return (
     <>
-      <Header currentUser={currentUser} />
+      <Header currentUser={currentUser} onLogout={handleLogout} />
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
 
         <Route element={<ProtectedRoute currentUser={currentUser} />}>
           <Route path="/" element={<WelcomePage currentUser={currentUser} />} />

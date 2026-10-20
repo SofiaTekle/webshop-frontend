@@ -1,15 +1,10 @@
 import type { Product, NewProduct } from "../types/product";
-import { getToken } from "./authService";
 
 const API_BASE = import.meta.env.VITE_GATEWAY_API_URL;
 
 export async function getProducts(): Promise<Product[]> {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/products`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -20,12 +15,8 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getProductById(id: number): Promise<Product> {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/products/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -36,14 +27,12 @@ export async function getProductById(id: number): Promise<Product> {
 }
 
 export async function createProduct(product: NewProduct): Promise<Product> {
-  const token = getToken();
-
   const response = await fetch(`${API_BASE}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify(product),
   });
 

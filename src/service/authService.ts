@@ -1,19 +1,18 @@
 import type { LoginRequest, TokenResponse, CurrentUser } from "../types/auth";
 
 const API_URL = import.meta.env.VITE_GATEWAY_API_URL;
-const TOKEN_KEY = "access_token";
-const USER_KEY = "current_user";
 
-export async function login(credentials: LoginRequest): Promise<TokenResponse> {
+export async function login(credentials: LoginRequest): Promise<CurrentUser> {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(credentials),
   });
 
-  if (!response.ok) {
+  if (!response.ok) { 
     throw new Error(`Login failed: ${response.status}`);
   }
   const data: TokenResponse = await response.json();
@@ -24,17 +23,10 @@ export async function login(credentials: LoginRequest): Promise<TokenResponse> {
     roles: data.roles,
   };
 
-  sessionStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-
-  sessionStorage.setItem(TOKEN_KEY, data.accessToken);
-
-  return data;
+  return currentUser;
 }
 
 
-export function getToken(): string | null {
-  return sessionStorage.getItem(TOKEN_KEY);
-}
 export async function getSession(): Promise<CurrentUser | null>{
   const response = await fetch(
     `${API_URL}/auth/me`,
@@ -51,20 +43,18 @@ export async function getSession(): Promise<CurrentUser | null>{
   return response.json();
 }
 
-export function isAuthenticated(): boolean {
-  return getToken() !== null;
-}
-export function getCurrentUser(): CurrentUser | null {
-  const storedUser = sessionStorage.getItem(USER_KEY);
 
-  if (storedUser === null) {
-    return null;
+export async function logout(): Promise<void> {
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Logout failed: ${response.status}`);
   }
-
-  return JSON.parse(storedUser) as CurrentUser;
 }
 
-export function logout(): void {
-  sessionStorage.removeItem(TOKEN_KEY);
-  sessionStorage.removeItem(USER_KEY);
-}
+
+
+

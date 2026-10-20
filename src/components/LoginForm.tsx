@@ -12,10 +12,13 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
   const handleLogin = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
+    try {   
     await onLogin({ email, password });
     setEmail("");
     setPassword("");
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (
