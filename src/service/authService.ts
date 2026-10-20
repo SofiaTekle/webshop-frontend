@@ -23,17 +23,10 @@ export async function login(credentials: LoginRequest): Promise<CurrentUser> {
     roles: data.roles,
   };
 
-  sessionStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-
-  sessionStorage.setItem(TOKEN_KEY, data.accessToken);
-
-  return data;
+  return currentUser;
 }
 
 
-export function getToken(): string | null {
-  return sessionStorage.getItem(TOKEN_KEY);
-}
 export async function getSession(): Promise<CurrentUser | null>{
   const response = await fetch(
     `${API_URL}/auth/me`,
@@ -50,11 +43,12 @@ export async function getSession(): Promise<CurrentUser | null>{
   return response.json();
 }
 
-export function isAuthenticated(): boolean {
-  return getToken() !== null;
-}
-export function getCurrentUser(): CurrentUser | null {
-  const storedUser = sessionStorage.getItem(USER_KEY);
+
+export async function logout(): Promise<void> {
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
 
   if (!response.ok) {
     throw new Error(`Logout failed: ${response.status}`);

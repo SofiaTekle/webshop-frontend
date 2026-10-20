@@ -6,13 +6,12 @@ export type LoginRequest = {
 };
 
 export type TokenResponse = {
-  accessToken: string;
-  expiresIn: number;
+  expiresIn?: number;
   subject: string;
   roles: Role[];
 };
 export type CurrentUser = {
-  expiresIn: number;
+  expiresIn?: number;
   subject: string;
   roles: Role[];
 };
