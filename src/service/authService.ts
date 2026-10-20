@@ -19,7 +19,8 @@ export async function login(credentials: LoginRequest): Promise<TokenResponse> {
   const data: TokenResponse = await response.json();
 
   const currentUser: CurrentUser = {
-    email: data.subject,
+    expiresIn: data.expiresIn,
+    subject: data.subject,
     roles: data.roles,
   };
 
@@ -30,8 +31,24 @@ export async function login(credentials: LoginRequest): Promise<TokenResponse> {
   return data;
 }
 
+
 export function getToken(): string | null {
   return sessionStorage.getItem(TOKEN_KEY);
+}
+export async function getSession(): Promise<CurrentUser | null>{
+  const response = await fetch(
+    `${API_URL}/auth/me`,
+    {
+      credentials: "include",
+    }
+  );
+  if(response.status === 401){
+    return null;
+  }
+  if(!response.ok){
+    throw new Error(`Kunde inte kontrollera inloggningen (${response.status})`);
+  }
+  return response.json();
 }
 
 export function isAuthenticated(): boolean {
