@@ -1,5 +1,4 @@
 import type { CartItem } from "../types/product";
-import { getToken } from "./authService";
 import type { CheckoutResponse } from "../types/checkout";
 import type { OrderResponse } from "../types/order";
 
@@ -7,18 +6,13 @@ const API_BASE = import.meta.env.VITE_GATEWAY_API_URL;
 
 
 export async function createOrder(items: CartItem[]): Promise<void> {
-  const token = getToken();
-
-  if (!token) {
-    throw new Error("Du måste logga in för att beställa.");
-  }
 
   const response = await fetch(`${API_BASE}/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify({
       items: items.map((item) => ({
         productId: item.id,
@@ -33,18 +27,14 @@ export async function createOrder(items: CartItem[]): Promise<void> {
 }
 
 export async function createCheckout(items: CartItem[]): Promise<CheckoutResponse> {
-  const token = getToken();
 
-  if (!token) {
-    throw new Error("Du måste logga in för att beställa.");
-  }
 
   const response = await fetch(`${API_BASE}/orders/checkout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify({
       items: items.map((item) => ({
         productId: item.id,
@@ -62,18 +52,9 @@ export async function createCheckout(items: CartItem[]): Promise<CheckoutRespons
 
 export async function getOrderById(orderId: number): Promise<OrderResponse>{
 
-  const token = getToken();
-
-  if (!token) {
-    throw new Error("Du måste logga in för att hämta ordern.");
-  }
-
-
   const response = await fetch(`${API_BASE}/orders/${orderId}`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    credentials: "include",
   });
 
   if (!response.ok) {
