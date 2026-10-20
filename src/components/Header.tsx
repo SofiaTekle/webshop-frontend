@@ -1,11 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  getCurrentUser,
-  isAuthenticated,
-  logout,
-} from "../service/authService";
+import { logout } from "../service/authService";
+import type { CurrentUser } from "../types/auth";
 
-function Header() {
+type HeaderProps = {
+  currentUser: CurrentUser | null;
+}
+
+function Header({currentUser}: HeaderProps) {
   useLocation();
   const navigate = useNavigate();
 
@@ -14,9 +15,8 @@ function Header() {
     navigate("/login", { replace: true });
   }
 
-  const authenticated = isAuthenticated();
-  const user = getCurrentUser();
-  const isAdmin = user?.roles.includes("ROLE_ADMIN");
+  const isAdmin = currentUser?.roles.includes("ROLE_ADMIN");
+  const authenticated = currentUser !== null;
 
   return (
     <header className="site-header">

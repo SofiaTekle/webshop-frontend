@@ -1,9 +1,12 @@
-import { getCurrentUser } from "../service/authService";
+import type { CurrentUser } from "../types/auth";
 
-const WelcomePage = () => {
-  const user = getCurrentUser();
+type WelcomePageProps = {
+  currentUser: CurrentUser | null;
+}
 
-  if (!user) {
+const WelcomePage = ({currentUser}: WelcomePageProps) => {
+
+  if (currentUser === null) {
     return (
       <main className="welcome-page">
         <section className="welcome-box">
@@ -19,8 +22,8 @@ const WelcomePage = () => {
       <section>
         <h1 className="center-text">Välkommen!</h1>
         <div className="welcome-box">
-          <p>Användare: {user.email}</p>
-          <p>Roller: {user.roles.join(", ")}</p>
+          <p>Användare: {currentUser.subject}</p>
+          <p>Roller: {currentUser.roles.join(", ")}</p>
         </div>
       </section>
     </main>

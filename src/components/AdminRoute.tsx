@@ -1,14 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { getCurrentUser } from "../service/authService";
+import type { CurrentUser } from "../types/auth.ts";
 
-const AdminRoute = () => {
-  const user = getCurrentUser();
+type AdminRouteProps = {
+  currentUser: CurrentUser | null;
+};
 
-  if (!user) {
+const AdminRoute = ({ currentUser }: AdminRouteProps) => {
+  if (currentUser === null) {
     return <Navigate to="/login" replace />;
   }
 
-  if (!user.roles.includes("ROLE_ADMIN")) {
+  if (!currentUser.roles.includes("ROLE_ADMIN")) {
     return <Navigate to="/products" replace />;
   }
 

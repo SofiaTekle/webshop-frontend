@@ -14,6 +14,9 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { PaymentSuccessPage } from "./pages/PaymentSuccessPage";
 import { PaymentCancelPage } from "./pages/PaymentCancelPage";
+import { useEffect, useState } from "react";
+import { getSession } from "./service/authService";
+import type { CurrentUser } from "./types/auth.ts";
 
 function App() {
   const {
@@ -21,21 +24,48 @@ function App() {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCart
+    clearCart,
   } = useCart();
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+
+  const [checkingSession, setCheckingSession] = useState(true);
+
+  useEffect(() => {
+    async function restoreSession() {
+      try {
+        const sessionUser = await getSession();
+        setCurrentUser(sessionUser);
+      } catch {
+        setCurrentUser(null);
+      } finally {
+        setCheckingSession(false);
+      }
+    }
+    restoreSession();
+  }, []);
+
+  if (checkingSession) {
+    return <p>Kontrollerar inloggning...</p>;
+  }
 
   return (
     <>
-      <Header />
+      <Header currentUser={currentUser} />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<WelcomePage />} />
+        <Route element={<ProtectedRoute currentUser={currentUser} />}>
+          <Route path="/" element={<WelcomePage currentUser={currentUser} />} />
           <Route path="/products" element={<ProductPage onAdd={addToCart} />} />
-          <Route path="/products/:id" element={<ProductDetailPage onAdd={addToCart} />}  />
-          <Route path="/payment/success" element={<PaymentSuccessPage clearCart={clearCart}/>}></Route>
-          <Route path="/payment/cancel" element={<PaymentCancelPage/>}></Route>
+          <Route
+            path="/products/:id"
+            element={<ProductDetailPage onAdd={addToCart} />}
+          />
+          <Route
+            path="/payment/success"
+            element={<PaymentSuccessPage clearCart={clearCart} />}
+          ></Route>
+          <Route path="/payment/cancel" element={<PaymentCancelPage />}></Route>
           <Route
             path="/cart"
             element={
@@ -48,7 +78,7 @@ function App() {
           />
         </Route>
 
-        <Route element={<AdminRoute />}>
+        <Route element={<AdminRoute currentUser={currentUser} />}>
           <Route path="/admin/products" element={<AdminProductPage />} />
           <Route path="/admin/products/new" element={<ProductFormPage />} />
           <Route path="*" element={<NotFoundPage />} />
