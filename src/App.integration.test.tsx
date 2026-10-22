@@ -18,16 +18,6 @@ describe("Produkthämtning – integration", () => {
   beforeEach(() => {
     sessionStorage.clear();
     localStorage.clear();
-
-    // Nuvarande inloggning använder sessionStorage.
-    sessionStorage.setItem("access_token", "test-token");
-    sessionStorage.setItem(
-      "current_user",
-      JSON.stringify({
-        email: "ana.test@example.com",
-        roles: ["ROLE_USER"],
-      }),
-    );
   });
 
   afterEach(() => {

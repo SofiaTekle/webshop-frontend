@@ -10,42 +10,74 @@
 
 ## Skillnader mellan testnivåer
 
-| Testnivå                  | Omfattning                                                          | Exempel                                                                                       |
-| ------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Komponenttest             | En enskild komponent                                                | ProductCard visar produktinformation och anropar onAdd vid klick.                             |
-| Frontend-integrationstest | Flera delar av frontend tillsammans, med mockat API                 | App renderas på /products och visar produkter eller ett felmeddelande beroende på API-svaret. |
-| End-to-end-test           | Ett komplett flöde i en riktig webbläsare med det startade systemet | Användaren loggar in och öppnar produktsidan via gateway och mikrotjänster.                   |
+### Komponenttest
+
+Testar en enskild komponent.
+Exempel: ProductCard visar produktinformation och anropar onAdd vid klick.
+
+### Frontend-integrationstest
+
+Testar flera delar av frontend tillsammans med ett mockat API.
+Exempel: App renderas på /products och visar produkter
+eller ett felmeddelande beroende på API-svaret.
+
+### End-to-end-test
+
+Testar ett komplett flöde i en riktig webbläsare med startade system.
+Exempel: Användaren loggar in och öppnar produktsidan
+via gateway och mikrotjänster. |
 
 ## Genomförande – FE-39 och FE-40
 
 MSW är konfigurerat med handlers för GET /auth/me och GET /products.
+
 Servern startas före testerna, handlers återställs efter varje test
-och servern stängs efter testkörningen.
+och servern stängs efter testkörningen. Renderade komponenter
+städas också undan efter varje test.
 
 App.integration.test.tsx renderar App i MemoryRouter på /products.
+App använder den riktiga getSession-funktionen, medan MSW
+returnerar ett mockat svar från /auth/me med subject och roles.
 
-Två scenarier testas: En inloggad användare ser produkterna från det mockade API:et. Ett felmeddelande visas när GET /products returnerar status 500. 
+Två scenarier testas:
+ En inloggad användare ser produkterna Testskor och Testtröja från det mockade API:et. Ett felmeddelande visas när GET /products returnerar status 500, och produkterna visas inte.
 
-## Nuvarande begränsning
+I felscenariot används server.use för att tillfälligt ersätta
+svaret från /products. Svaret från /auth/me är fortfarande lyckat.
 
-ProtectedRoute använder fortfarande sessionStorage.
-Testerna förbereder därför en test-token och en testanvändare där.
+## Inloggning och begränsningar
 
-Handlern för /auth/me är förberedd men används ännu inte av App.
-När frontend har anpassats till cookie-inloggning och återställning
-via /auth/me behöver testernas inloggningsförberedelse uppdateras.
+App hämtar den aktuella användaren via GET /auth/me.
+MSW returnerar en mockad inloggad användare i testerna.
+Ingen token eller användare sparas i sessionStorage.
 
 Testerna verifierar frontendens beteende med mockade API-svar.
-De verifierar inte riktig JWT-validering eller kommunikationen
-mellan gateway och mikrotjänster.
+De verifierar inte riktig JWT-validering, hantering av HttpOnly-cookies
+i webbläsaren eller kommunikationen mellan gateway och mikrotjänster.
+
+Återställning av användare vid status 401 testas separat i FE-41.
 
 ## Körning och resultat
 
+Kör testerna:
+
+bash
+npm test
+
+Kontrollera produktionsbygget:
+
+bash
+npm run build
+
+Verifierat efter anpassningen till inloggning via /auth/me:
+
 - npm test: 4 tester godkända i 2 testfiler.
+- Två komponenttester för ProductCard.
+- Två integrationstester för produkthämtning.
 - npm run build: godkänd.
 
 ## Referenser
 
 - https://vitest.dev/guide/
 - https://testing-library.com/docs/react-testing-library/intro/
-- https://mswjs.io/docs/quick-start
+- https://mswjs.io/docs/quick-start/
