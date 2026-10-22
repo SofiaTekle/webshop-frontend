@@ -7,5 +7,6 @@ export default defineConfig({
     env: {
       VITE_GATEWAY_API_URL: "http://localhost:9003/gateway",
     },
+    exclude: ["e2e/**", "**/node_modules/**"],
   },
 });
