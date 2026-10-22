@@ -52,3 +52,34 @@ describe("Produkthämtning – integration", () => {
     expect(screen.queryByText("Testskor")).not.toBeInTheDocument();
   });
 });
+
+describe("Återställning av användare", () => {
+  it("återställer användaren när /auth/me svarar med 200", async () => {
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByText("Användare: ana.test@example.com"),
+    ).toBeInTheDocument();
+  });
+  it("visar login när /auth/me svarar med 401", async () => {
+    server.use(
+      http.get(`${API_URL}/auth/me`, () => {
+        return new HttpResponse(null, { status: 401 });
+      }),
+    );
+
+    render(
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Sign in" }),
+    ).toBeInTheDocument();
+  });
+});
