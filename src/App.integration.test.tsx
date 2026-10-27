@@ -79,7 +79,7 @@ describe("Återställning av användare", () => {
     );
 
     expect(
-      await screen.findByRole("heading", { name: "Sign in" }),
+      await screen.findByRole("heading", { name: "Logga in" }),
     ).toBeInTheDocument();
   });
 });

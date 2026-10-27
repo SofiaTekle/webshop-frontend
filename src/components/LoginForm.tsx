@@ -24,7 +24,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
   return (
     <>
       <form className="login-form" onSubmit={handleLogin} method="POST">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">E-post</label>
         <input
           type="email"
           value={email}
@@ -32,7 +32,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
           required
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Lösenord</label>
         <input
           type="password"
           value={password}
@@ -40,7 +40,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
           required
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button type="submit">Log in</button>
+        <button type="submit">Logga in</button>
       </form>
     </>
   );

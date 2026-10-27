@@ -14,7 +14,7 @@ function CartItemCard({ item, onIncrease, onDecrease }: CartItemProps) {
     <div className="cartitem-card">
       <img src={item.imageUrl || placeholderImage} alt={item.name} />
       <h2>{item.name}</h2>
-      <p>{item.description}</p>
+      <p className="cartitem-description">{item.description}</p>
       <p>{item.price} kr</p>
       <p>Antal: {item.quantity}</p>
       <p>Summa: {lineTotal} kr</p>

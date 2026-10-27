@@ -17,7 +17,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
     >
       <img src={product.imageUrl || placeholderImage} alt={product.name} />
       <h2>{product.name}</h2>
-      <p>{product.description}</p>
+      <p className="product-description">{product.description}</p>
       <p>{product.price} kr</p>
       <p>Lager: {product.stock}</p>
 

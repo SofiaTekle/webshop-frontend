@@ -35,7 +35,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
   return (
     <main>
       <section className="login-box">
-        <h1 className="center-text">Sign in</h1>
+        <h1 className="center-text">Logga in</h1>
 
         {error && <p role="alert">{error}</p>}
 
