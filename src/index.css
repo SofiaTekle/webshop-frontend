@@ -2,25 +2,31 @@ html {
   scroll-behavior: smooth;
   font-family: system-ui, sans-serif;
 }
+
 * {
   box-sizing: border-box;
 }
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
 main {
   flex: 1;
 }
+
 body {
   margin: 0;
   background-color: #dceaf7;
 }
+
 footer {
   min-height: 50px;
   background-color: #279afe;
 }
+
 header {
   height: 65px;
   position: sticky;
@@ -29,10 +35,12 @@ header {
   align-items: center;
   padding: 30px 20px;
 }
+
 a:hover {
   text-decoration: underline;
   color: black;
 }
+
 .nav-list {
   display: flex;
   gap: 1rem;
@@ -40,9 +48,79 @@ a:hover {
   margin: 0;
   padding: 10px;
 }
+
 .site-header {
   justify-content: space-between;
 }
+
+.site-header .login-link {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font: inherit;
+  font-size: 0.89rem;
+  line-height: 1;
+  color: #243040;
+  background-color: #e9f4fe;
+  border: 1px solid #b8cde0;
+  border-radius: 5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header .login-link:hover {
+  background-color: #d5e7f6;
+  color: #243040;
+  text-decoration: none;
+}
+
+.site-header .logout-button {
+  padding: 0.25rem 0.6rem;
+  font: inherit;
+  font-size: 0.89rem;
+  line-height: 1;
+  align-self: center;
+  vertical-align: middle;
+  color: #243040;
+  background-color: #e9f4fe;
+  border: 1px solid #b8cde0;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.site-header .logout-button:hover {
+  background-color: #d5e7f6;
+  color: #243040;
+}
+
+.product-filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin: 0 1rem 1.5rem;
+}
+
+.product-filters select,
+.product-filters input {
+  height: 32px;
+  padding: 0.25rem 0.4rem;
+  font: inherit;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.product-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-search input {
+  min-width: 0;
+  width: 170px;
+}
+
 .product-card {
   width: 280px;
   text-align: center;
@@ -60,6 +138,7 @@ a:hover {
   flex-direction: column;
   cursor: pointer;
 }
+
 .product-card h2 {
   min-height: 2.4em;
   line-height: 1.2;
@@ -67,6 +146,11 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
+
+.product-description {
+  flex-grow: 1;
+}
+
 .product-card button {
   margin-top: auto;
   align-self: center;
@@ -80,7 +164,6 @@ a:hover {
   margin-bottom: 10px;
 }
 
-
 .product-container {
   display: flex;
   justify-content: center;
@@ -91,6 +174,7 @@ a:hover {
 .center-text {
   text-align: center;
 }
+
 .product-form {
   background-color: #e9f4fe;
   border: 2px solid lightgray;
@@ -102,27 +186,32 @@ a:hover {
   align-items: center;
   gap: 1rem;
 }
+
 .product-form label {
   display: block;
 }
+
 .product-form button {
   padding: 5px 10px;
-  background-color: lightgray;
-  border: 1px solid black;
+  background-color: #edf4fa;
+  border: 1px solid #b8cde0;
   cursor: pointer;
   justify-self: center;
   margin-top: 0.5rem;
 }
+
 .product-form > p,
 .product-form > button {
   grid-column: 1 / -1;
 }
-.product-form input ,
+
+.product-form input,
 .product-form select {
   width: 100%;
   padding: 0.5rem;
   font: inherit;
 }
+
 .cart-container {
   display: flex;
   justify-content: center;
@@ -130,6 +219,7 @@ a:hover {
   padding: 10px 20px;
   gap: 2rem;
 }
+
 .cartitem-card {
   width: 225px;
   text-align: center;
@@ -142,18 +232,19 @@ a:hover {
   max-width: 100%;
   position: relative;
   align-items: stretch;
-  width: 225px;
   min-height: 280px;
   display: flex;
   flex-direction: column;
 }
-.cartitem-card h2{
+
+.cartitem-card h2 {
   min-height: 2.4em;
   line-height: 1.2;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .cartitem-card img {
   width: 100%;
   height: 120px;
@@ -161,6 +252,17 @@ a:hover {
   border-radius: 10px;
   margin-bottom: 0px;
 }
+
+.cartitem-card button {
+  display: inline-block;
+  width: auto;
+  margin: 3px 4px;
+}
+
+.cartitem-description {
+  flex-grow: 1;
+}
+
 .welcome-page {
   display: flex;
   justify-content: center;
@@ -174,6 +276,7 @@ a:hover {
   border: 2px solid lightgray;
   border-radius: 20px;
 }
+
 .login-box {
   width: 300px;
   margin: 3rem auto;
@@ -182,14 +285,29 @@ a:hover {
   border: 2px solid lightgray;
   border-radius: 15px;
 }
+
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
+
 .login-form input,
 .login-form button {
   padding: 0.5rem;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.login-form button {
+  background-color: #279afe;
+  border: 1px solid #1685e5;
+  color: white;
+  font-size: 1rem;
+}
+
+.login-form button:hover:not(:disabled) {
+  background-color: #1685e5;
 }
 
 .product-detail-page {
@@ -214,7 +332,7 @@ a:hover {
 }
 
 .product-detail-image {
- width: 100%;
+  width: 100%;
   height: 280px;
   object-fit: cover;
   border-radius: 15px;
@@ -225,3 +343,177 @@ a:hover {
   font-size: 1.1rem;
 }
 
+.cookie-info-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem;
+  border: 1px solid #b8cde0;
+  border-radius: 10px;
+  background: #e9f4fe;
+  color: #243040;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.cookie-info-banner h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.cookie-info-banner p {
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.cookie-info-banner button {
+  flex-shrink: 0;
+}
+
+.cookie-info-link {
+  margin: 0;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Gemensam stil för knappar */
+button {
+  padding: 0.4rem 0.75rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: #243040;
+  background-color: #edf4fa;
+  border: 1px solid #b8cde0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #d5e7f6;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 2px solid #477da8;
+  outline-offset: 2px;
+}
+
+button.cookie-info-link:hover:not(:disabled) {
+  background: none;
+  border: none;
+  color: black;
+  text-decoration: underline;
+}
+
+/* Mindre skärmar */
+@media (max-width: 700px) {
+  .site-header {
+    height: auto;
+    min-height: 65px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-list {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobil och mindre surfplattor */
+@media (max-width: 600px) {
+  .product-search {
+    flex-wrap: nowrap;
+  }
+  
+  .cookie-info-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .product-filters {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .site-header {
+    height: auto;
+    min-height: 65px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-list {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .product-container,
+  .cart-container {
+    gap: 1rem;
+    padding: 10px;
+  }
+
+  .product-detail-page {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Små mobilskärmar */
+@media (max-width: 500px) {
+  .product-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .product-filters > span,
+  .product-filters > select,
+  .product-search {
+    width: 200px;
+    max-width: 100%;
+  }
+
+  .product-search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .product-search input {
+    width: 200px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}

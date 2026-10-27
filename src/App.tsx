@@ -17,6 +17,7 @@ import { PaymentCancelPage } from "./pages/PaymentCancelPage";
 import { useEffect, useState } from "react";
 import { getSession, login, logout } from "./service/authService";
 import type { CurrentUser, LoginRequest } from "./types/auth.ts";
+import CookieInfoBanner from "./components/CookieInfoBanner";
 
 function App() {
   const {
@@ -44,7 +45,7 @@ function App() {
     restoreSession();
   }, []);
 
-async function handleLogin(credentials: LoginRequest): Promise<void> {
+  async function handleLogin(credentials: LoginRequest): Promise<void> {
     const loggedInUser = await login(credentials);
     setCurrentUser(loggedInUser);
   }
@@ -62,7 +63,6 @@ async function handleLogin(credentials: LoginRequest): Promise<void> {
   if (checkingSession) {
     return <p>Kontrollerar inloggning...</p>;
   }
-
 
   return (
     <>
@@ -100,7 +100,7 @@ async function handleLogin(credentials: LoginRequest): Promise<void> {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-
+      <CookieInfoBanner />
       <Footer />
     </>
   );

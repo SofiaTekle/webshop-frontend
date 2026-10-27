@@ -4,10 +4,9 @@ import type { CurrentUser } from "../types/auth";
 type HeaderProps = {
   currentUser: CurrentUser | null;
   onLogout: () => Promise<void>;
-}
+};
 
-function Header({currentUser, onLogout}: HeaderProps) {
-
+function Header({ currentUser, onLogout }: HeaderProps) {
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -38,21 +37,22 @@ function Header({currentUser, onLogout}: HeaderProps) {
               <li>
                 <Link to="/cart">Kundvagn</Link>
               </li>
-              <li>
-                <button type="button" onClick={handleLogout}>
-                  Logga ut
-                </button>
-              </li>
 
               {isAdmin && (
                 <li>
                   <Link to="/admin/products">Hantera produkter</Link>
                 </li>
               )}
+
+              <li className="logout-item">
+                <button className="logout-button" type="button" onClick={handleLogout}>
+                  Logga ut
+                </button>
+              </li>
             </>
           ) : (
             <li>
-              <Link to="/login">Logga in</Link>
+              <Link className="login-link" to="/login">Logga in</Link>
             </li>
           )}
         </ul>

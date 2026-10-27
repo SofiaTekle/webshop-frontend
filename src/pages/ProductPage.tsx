@@ -26,7 +26,9 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
   const filteredProducts =
     selectedCategory === "Alla"
       ? searchedProducts
-      : searchedProducts.filter((product) => product.category === selectedCategory);
+      : searchedProducts.filter(
+          (product) => product.category === selectedCategory,
+        );
 
   useEffect(() => {
     async function loadProducts() {
@@ -61,7 +63,7 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
   return (
     <main>
       <h1 className="center-text">Produkter</h1>
-      <div>
+      <div className="product-filters">
         <span>
           <strong>Kategori: </strong>
         </span>
@@ -75,18 +77,19 @@ export default function ProductPage({ onAdd }: ProductPageProps) {
             </option>
           ))}
         </select>
-         <label htmlFor="product-search">
-         <strong>Sök produkt: </strong>
-        </label>
+        <div className="product-search">
+          <label htmlFor="product-search">
+            <strong>Sök produkt: </strong>
+          </label>
 
-        <input
-          id="product-search"
-          type="search"
-          value={searchTerm}
-          placeholder="Sök bland produkter..."
-          onChange={(event) => setSearchTerm(event.target.value)}
-        />
-
+          <input
+            id="product-search"
+            type="search"
+            value={searchTerm}
+            placeholder="Sök bland produkter..."
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
       </div>
 
       <div className="product-container">
