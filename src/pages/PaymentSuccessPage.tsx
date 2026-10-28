@@ -82,8 +82,30 @@ export const PaymentSuccessPage = ({ clearCart }: PaidOrderProps) => {
   }
   if (order.paymentStatus === "PAID") {
     return (
-      <main className="center-text">
-        <h1>Tack för din beställning!</h1>
+     <main className="center-text order-success">
+      <h1>Tack för din beställning!</h1>
+
+      <p className="order-confirmation-message">
+        Din betalning är genomförd och en orderbekräftelse har skickats till din e-postadress.
+      </p>
+
+      <h2>Din beställning</h2>
+
+      <div className="order-items">
+        {order.orderItems.map((item) => (
+          <p key={item.id}>
+            {item.name} – {item.quantity} st ×{" "}
+            {item.price.toLocaleString("sv-SE")} kr
+          </p>
+        ))}
+      </div>
+
+      <p className="order-total">
+        <strong>
+          Totalt: {order.totalPrice.toLocaleString("sv-SE")} kr
+        </strong>
+      </p>
+      <p className="order-thank-you">Tack för att du handlar hos oss!</p>
       </main>
     );
   }

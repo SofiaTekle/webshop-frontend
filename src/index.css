@@ -399,6 +399,69 @@ a:hover {
   margin: 0;
 }
 
+.order-items {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.5rem auto;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) 50px 90px;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.order-item-quantity,
+.order-item-price {
+  text-align: right;
+}
+
+.order-success {
+  padding: 1rem 1rem 3rem;
+}
+
+.order-success h1 {
+  margin-bottom: 0.75rem;
+}
+
+.order-confirmation-message {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  font-size: 0.99rem;
+}
+
+.order-success h2 {
+  margin: 0 0 1rem;
+}
+
+.order-items {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1rem auto 0.75rem;
+}
+
+.order-items p {
+  margin: 0 0 0.75rem;
+}
+
+.order-total {
+  max-width: 600px;
+  margin: 1rem auto;
+   padding-top: 1rem;
+  border-top: 1px solid #b8cde0;
+  font-size: 1.05rem;
+}
+
+.order-thank-you {
+  margin: 2rem auto 1rem;
+  font-size: 0.89rem;
+  color: #43566b;
+}
+
 /* Gemensam stil för knappar */
 button {
   padding: 0.4rem 0.75rem;
@@ -454,7 +517,7 @@ button.cookie-info-link:hover:not(:disabled) {
   .product-search {
     flex-wrap: nowrap;
   }
-  
+
   .cookie-info-banner {
     align-items: flex-start;
     flex-direction: column;
@@ -515,5 +578,12 @@ button.cookie-info-link:hover:not(:disabled) {
     width: 200px;
     max-width: 100%;
     box-sizing: border-box;
+  }
+}
+
+@media (max-width: 400px) {
+  .order-item {
+    grid-template-columns: minmax(0, 1fr) 40px 75px;
+    gap: 0.5rem;
   }
 }
